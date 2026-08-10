@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UPCH - Elementos de Química | Clase 4: Enlaces Químicos</title>
+    <style>
+        /* ===== VARIABLES Y RESET ===== */
+        :root {
+            --upch-gold: #E8B800;
+            --upch-dark: #0B2A3A;
+            --upch-blue: #1A4A5A;
+            --upch-light: #2A6A7A;
+            --accent: #E94560;
+            --text: #1e3c4a;
+            --white: #ffffff;
+            --sand: #f4e9c1;
+            --shadow: rgba(0, 0, 0, 0.15);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f0f2 0%, #c8d8dc 100%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, var(--upch-dark) 0%, var(--upch-light) 100%);
+            color: var(--white);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 6px 20px var(--shadow);
+            border-bottom: 5px solid var(--upch-gold);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+        .logo-upch {
+            width: 120px;
+            height: auto;
+            background: var(--white);
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.2rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            color: var(--upch-gold);
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        /* ===== NAV ===== */
+        .nav-container {
+            background: var(--upch-dark);
+            padding: 0.8rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .nav-btn {
+            background: var(--white);
+            color: var(--upch-dark);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            font-size: 0.95rem;
+        }
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: var(--upch-gold);
+            color: var(--upch-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ===== CONTENEDOR ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 24px var(--shadow);
+            border-left: 6px solid var(--upch-gold);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        h2 {
+            color: var(--upch-blue);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid var(--upch-gold);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 2rem;
+        }
+        h3 {
+            color: var(--upch-light);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* ===== CAJAS DE INFORMACIÓN ===== */
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 5px solid #2196f3;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .tip-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+            border-left: 5px solid #ffc107;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .bio-box {
+            background: linear-gradient(135deg, #d1ecf1 0%, #a8dadc 100%);
+            border-left: 5px solid #17a2b8;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .pharma-box {
+            background: linear-gradient(135deg, #f8d7da 0%, #f1aeb5 100%);
+            border-left: 5px solid #dc3545;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .problem-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 5px solid #28a745;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        /* ===== TABLAS ===== */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            min-width: 500px;
+        }
+        th {
+            background: linear-gradient(135deg, var(--upch-blue), var(--upch-light));
+            color: var(--white);
+            padding: 1rem 1.2rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 0.9rem 1.2rem;
+            border-bottom: 1px solid #eee;
+        }
+        tr:hover td {
+            background: #f8fff0;
+        }
+
+        /* ===== PESTAÑAS INTERNAS ===== */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .tab {
+            background: var(--sand);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .tab.active {
+            background: var(--upch-gold);
+            color: var(--upch-dark);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* ===== CALCULADORAS ===== */
+        .calculator {
+            background: linear-gradient(135deg, #fff9f5 0%, #fff0e8 100%);
+            border: 3px solid var(--upch-gold);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .calc-title {
+            color: var(--upch-blue);
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .calc-input-group {
+            margin: 1rem 0;
+        }
+        .calc-input-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+        .calc-input-group input,
+        .calc-input-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--sand);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .calc-input-group input:focus,
+        .calc-input-group select:focus {
+            outline: none;
+            border-color: var(--upch-gold);
+        }
+        .calc-button {
+            background: var(--upch-blue);
+            color: var(--white);
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        .calc-button:hover {
+            background: var(--upch-gold);
+            color: var(--upch-dark);
+            transform: translateY(-2px);
+        }
+        .calc-result {
+            background: var(--white);
+            border-left: 5px solid var(--accent);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            display: none;
+        }
+        .calc-result.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ===== FLASHCARDS ===== */
+        .fc-stats {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        .fc-stat {
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 700;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+        .fc-stat.good {
+            background: #28a745;
+        }
+        .fc-stat.bad {
+            background: #dc3545;
+        }
+        .fc-stat.pending {
+            background: #6c757d;
+        }
+        .fc-stat.total {
+            background: var(--upch-light);
+        }
+        .fc-progress {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            max-width: 720px;
+            margin: 0 auto 1.5rem;
+        }
+        .fc-progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--upch-gold), var(--accent));
+            transition: width 0.4s;
+        }
+        .flashcard-scene {
+            perspective: 1400px;
+            max-width: 720px;
+            height: 320px;
+            margin: 0 auto 1.5rem;
+        }
+        .flashcard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+        .fc-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: auto;
+            box-shadow: 0 8px 24px var(--shadow);
+            font-size: 1.15rem;
+        }
+        .fc-front {
+            background: linear-gradient(135deg, var(--upch-blue), var(--upch-light));
+            color: #fff;
+            border: 3px solid var(--upch-gold);
+        }
+        .fc-back {
+            background: linear-gradient(135deg, #fff9e6, var(--sand));
+            color: var(--text);
+            border: 3px solid var(--upch-gold);
+            transform: rotateY(180deg);
+        }
+        .fc-label {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            font-weight: 800;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+        .fc-hint {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+        .fc-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .fc-btn {
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #fff;
+        }
+        .fc-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .fc-btn.good {
+            background: #28a745;
+        }
+        .fc-btn.bad {
+            background: #dc3545;
+        }
+        .fc-btn:not(:disabled):hover {
+            transform: translateY(-3px);
+        }
+        .fc-link {
+            background: none;
+            border: none;
+            color: #6c757d;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        /* ===== MAPA CONCEPTUAL ===== */
+        .map-container {
+            overflow-x: auto;
+            padding: 1rem 0;
+        }
+        .map-tree,
+        .map-tree ul {
+            list-style: none;
+        }
+        .map-tree ul {
+            display: none;
+            padding-left: 1.6rem;
+            margin-top: 0.6rem;
+            border-left: 3px solid var(--upch-gold);
+        }
+        .map-tree li.open>ul {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        .map-tree li {
+            margin: 0.4rem 0;
+        }
+        .map-node {
+            display: inline-block;
+            background: var(--upch-blue);
+            color: #fff;
+            padding: 0.6rem 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .map-node:hover {
+            background: var(--upch-gold);
+            color: var(--upch-dark);
+            transform: translateX(4px);
+        }
+        .map-node.root {
+            background: var(--accent);
+            font-size: 1.15rem;
+        }
+        .map-node.branch {
+            background: var(--upch-light);
+        }
+        .map-leaf {
+            display: inline-block;
+            background: var(--sand);
+            color: var(--text);
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            border: 2px solid var(--upch-gold);
+        }
+        li.has-children>.map-node::before {
+            content: '▶ ';
+            font-size: 0.8em;
+        }
+        li.has-children.open>.map-node::before {
+            content: '▼ ';
+            font-size: 0.8em;
+        }
+
+        /* ===== GLOSARIO ===== */
+        .glossary-term {
+            background: var(--white);
+            border: 2px solid var(--upch-gold);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .glossary-term:hover {
+            background: #fff9e6;
+            transform: translateX(5px);
+        }
+        .glossary-definition {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--upch-gold);
+        }
+        .glossary-definition.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* ===== ERRORES ===== */
+        .error-card {
+            background: linear-gradient(135deg, #ffe6e6 0%, #ffb3b3 100%);
+            border-left: 5px solid #dc3545;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .error-title {
+            color: #dc3545;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .correction {
+            background: #d4edda;
+            border-left: 3px solid #28a745;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* ===== QUIZ ===== */
+        .quiz-container {
+            background: linear-gradient(135deg, var(--upch-blue) 0%, var(--upch-light) 100%);
+            color: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .quiz-question {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+        .quiz-option {
+            background: var(--white);
+            color: var(--text);
+            border: 3px solid transparent;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .quiz-option:hover {
+            border-color: var(--upch-gold);
+            transform: translateY(-3px);
+        }
+        .quiz-option.correct {
+            background: #4caf50;
+            color: white;
+            border-color: #2e7d32;
+        }
+        .quiz-option.incorrect {
+            background: #f44336;
+            color: white;
+            border-color: #c62828;
+        }
+        .quiz-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .quiz-feedback {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+        .quiz-progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        .quiz-progress span {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--upch-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            margin-top: 3rem;
+            border-top: 5px solid var(--upch-gold);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            h3 {
+                font-size: 1.2rem;
+            }
+            .logo-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .logo-upch {
+                width: 80px;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+            .nav-buttons {
+                gap: 0.4rem;
+            }
+            .nav-btn {
+                padding: 0.5rem 0.9rem;
+                font-size: 0.8rem;
+            }
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+            .tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 0.5rem;
+            }
+            .tab {
+                flex-shrink: 0;
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            .flashcard-scene {
+                height: 360px;
+            }
+            .fc-face {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+            .fc-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            .fc-btn {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.4rem;
+            }
+            .subtitle {
+                font-size: 0.9rem;
+            }
+            header {
+                padding: 1rem;
+            }
+            .card {
+                padding: 1rem;
+            }
+            .nav-btn {
+                padding: 0.4rem 0.7rem;
+                font-size: 0.75rem;
+            }
+        }
+        /* ===== IMÁGENES ===== */
+        .img-container {
+            text-align: center;
+            margin: 1.8rem 0;
+        }
+        .img-container img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        .card ul,
+        .info-box ul,
+        .bio-box ul,
+        .pharma-box ul {
+            padding-left: 1.8rem;
+            margin: 0.6rem 0;
+        }
+        .card ul ul,
+        .info-box ul ul {
+            padding-left: 2.2rem;
+            margin-top: 0.2rem;
+            margin-bottom: 0.4rem;
+            list-style-type: circle;
+        }
+        .card li,
+        .info-box li {
+            margin-bottom: 0.6rem;
+            line-height: 1.6;
+        }
+        .card li strong,
+        .info-box li strong {
+            display: inline-block;
+            margin-right: 0.3rem;
+        }
+        /* Estilo para miniaturas de imágenes en aplicaciones */
+        .img-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        .img-grid figure {
+            max-width: 200px;
+            text-align: center;
+            background: var(--white);
+            padding: 0.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        .img-grid figure img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .img-grid figcaption {
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="logo-upch.png" alt="Logo UPCH" class="logo-upch" />
+            <div>
+                <h1>Universidad Peruana Cayetano Heredia</h1>
+                <p class="subtitle">Unidad de Formación Básica Integral - UFBI</p>
+                <p class="subtitle">Elementos de Química · Clase 4: Enlaces Químicos</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-container">
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showSection('inicio',this)">🏠 Inicio</button>
+            <button class="nav-btn" onclick="showSection('conceptos',this)">📚 Conceptos</button>
+            <button class="nav-btn" onclick="showSection('mapa',this)">🗺️ Mapa</button>
+            <button class="nav-btn" onclick="showSection('flashcards',this)">🃏 Flashcards</button>
+            <button class="nav-btn" onclick="showSection('herramientas',this)">🧮 Herramientas</button>
+            <button class="nav-btn" onclick="showSection('aplicaciones',this)">🏥 Aplicaciones</button>
+            <button class="nav-btn" onclick="showSection('mnemotecnias',this)">🧠 Nemotecnias</button>
+            <button class="nav-btn" onclick="showSection('glosario',this)">📖 Glosario</button>
+            <button class="nav-btn" onclick="showSection('errores',this)">⚠️ Errores</button>
+            <button class="nav-btn" onclick="showSection('bibliografia',this)">📚 Bibliografía</button>
+            <button class="nav-btn" onclick="showSection('quiz',this)">🎯 Quiz</button>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- ==================== INICIO ==================== -->
+        <section id="inicio" class="section active">
+            <div class="card">
+                <h2>🎯 Objetivos de la Clase 4</h2>
+                <div class="info-box">
+                    <ul style="font-size:1.1rem; line-height:2;">
+                        <li>✓ Definir el enlace químico y explicar su formación.</li>
+                        <li>✓ Identificar los electrones de valencia y escribir símbolos de Lewis.</li>
+                        <li>✓ Distinguir entre enlace iónico, covalente y metálico.</li>
+                        <li>✓ Aplicar la regla del octeto para formar iones y compuestos.</li>
+                        <li>✓ Clasificar enlaces covalentes (simple, coordinado, múltiple; polar y apolar).</li>
+                        <li>✓ Relacionar la electronegatividad con la polaridad de los enlaces.</li>
+                        <li>✓ Conectar estos conceptos con aplicaciones en ciencias de la salud.</li>
+                    </ul>
+                </div>
+                <h3>🩺 Relevancia para las Ciencias de la Salud</h3>
+                <div class="bio-box">
+                    <strong>¿Por qué son importantes los enlaces químicos en salud?</strong><br>
+                    Los enlaces químicos determinan la estructura y función de biomoléculas, fármacos, electrolitos y tejidos. Comprenderlos permite entender:
+                    <ul style="margin-top:0.8rem;">
+                        <li>• La formación de <strong>iones</strong> (Na⁺, K⁺, Cl⁻) que regulan el equilibrio hídrico y el potencial de membrana.</li>
+                        <li>• La estructura de <strong>fármacos</strong> (aspirina, paracetamol) y su interacción con receptores.</li>
+                        <li>• Los <strong>enlaces de hidrógeno</strong> en el ADN y las proteínas (estructura secundaria).</li>
+                        <li>• La <strong>polaridad</strong> del agua y su papel como solvente universal.</li>
+                        <li>• La <strong>conductividad</strong> de soluciones iónicas en el organismo.</li>
+                    </ul>
+                </div>
+                <div class="img-container">
+                    <!-- IMAGEN: aplicaciones-salud.png → ilustración de iones, fármacos, ADN -->
+                    <img src="aplicaciones-salud.png" alt="Aplicaciones de enlaces químicos en salud" style="max-width:600px;">
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CONCEPTOS ==================== -->
+        <section id="conceptos" class="section">
+            <div class="card">
+                <h2>📚 Conceptos Fundamentales</h2>
+                <div id="conceptos-tabs" class="tab-group">
+                    <div class="tabs">
+                        <button class="tab active" onclick="showTab('conceptos-tabs','sub-enlace',this)">🔗 Enlace Químico</button>
+                        <button class="tab" onclick="showTab('conceptos-tabs','sub-ionico',this)">⚡ Enlace Iónico</button>
+                        <button class="tab" onclick="showTab('conceptos-tabs','sub-covalente',this)">🧪 Enlace Covalente</button>
+                        <button class="tab" onclick="showTab('conceptos-tabs','sub-polaridad',this)">⚖️ Polaridad</button>
+                    </div>
+
+                    <!-- Enlace Químico -->
+                    <div id="sub-enlace" class="tab-content active">
+                        <h3>Enlace Químico</h3>
+                        <p>Es la <strong>unión de dos o más átomos</strong> para alcanzar mayor estabilidad (menor energía). Los átomos tienden a ganar, perder o compartir electrones para completar su capa de valencia.</p>
+                        <div class="info-box">
+                            <strong>Condiciones para la formación:</strong>
+                            <ul>
+                                <li>Los átomos deben <strong>acercarse</strong> e interactuar.</li>
+                                <li>Las <strong>fuerzas atractivas</strong> (núcleo-electrones) deben superar a las <strong>repulsivas</strong> (núcleo-núcleo, electrón-electrón).</li>
+                                <li>Se alcanza un <strong>equilibrio</strong> cuando las fuerzas se igualan.</li>
+                            </ul>
+                        </div>
+                        <div class="tip-box">
+                            <strong>Electrones de valencia:</strong> Son los electrones del último nivel energético. Son los únicos que participan en los enlaces. Para elementos representativos (Grupos A), el número de electrones de valencia coincide con el número del grupo.
+                        </div>
+                        <div class="table-responsive">
+                            <table>
+                                <tr><th>Elemento</th><th>Configuración</th><th>Electrones de valencia</th></tr>
+                                <tr><td>O (Z=8)</td><td>1s² 2s² 2p⁴</td><td>6</td></tr>
+                                <tr><td>Al (Z=13)</td><td>1s² 2s² 2p⁶ 3s² 3p¹</td><td>3</td></tr>
+                                <tr><td>As (Z=33)</td><td>[Ar] 4s² 3d¹⁰ 4p³</td><td>5</td></tr>
+                            </table>
+                        </div>
+                        <div class="img-container">
+                            <!-- IMAGEN: simbolos-lewis.png → ejemplos de símbolos de Lewis para elementos comunes -->
+                            <img src="simbolos-lewis.png" alt="Símbolos de Lewis" style="max-width:400px;">
+                        </div>
+                        <p><strong>Símbolos de Lewis:</strong> Representan los electrones de valencia como puntos alrededor del símbolo del elemento.</p>
+                    </div>
+
+                    <!-- Enlace Iónico -->
+                    <div id="sub-ionico" class="tab-content">
+                        <h3>Enlace Iónico</h3>
+                        <p>Es la <strong>fuerza de atracción electrostática</strong> entre iones de cargas opuestas. Se forma por <strong>transferencia de electrones</strong> de un elemento electropositivo (metales) a uno electronegativo (no metales).</p>
+                        <ul>
+                            <li><strong>Regla del octeto:</strong> Los átomos tienden a ganar, perder o compartir electrones hasta tener 8 electrones en su capa de valencia (configuración de gas noble).</li>
+                            <li><strong>Metales</strong> (Grupos IA, IIA) pierden electrones → cationes.</li>
+                            <li><strong>No metales</strong> (Grupos VIA, VIIA) ganan electrones → aniones.</li>
+                            <li>La diferencia de electronegatividad (ΔEN) > 1.7 caracteriza al enlace iónico.</li>
+                        </ul>
+                        <div class="img-container">
+                            <!-- IMAGEN: enlace-ionico.png → formación de NaCl, MgO -->
+                            <img src="enlace-ionico.png" alt="Formación de enlace iónico" style="max-width:500px;">
+                        </div>
+                        <div class="bio-box">
+                            <strong>Ejemplos en salud:</strong>
+                            <ul>
+                                <li><strong>NaCl</strong> (cloruro de sodio) – suero fisiológico, electrolito.</li>
+                                <li><strong>KCl</strong> (cloruro de potasio) – equilibrio iónico.</li>
+                                <li><strong>CaCO₃</strong> (carbonato de calcio) – antiácido, suplemento.</li>
+                                <li><strong>MgSO₄</strong> (sulfato de magnesio) – relajante muscular.</li>
+                            </ul>
+                        </div>
+                        <div class="problem-box">
+                            <strong>Ejercicio:</strong> Escribe la estructura de Lewis del CaO (óxido de calcio). Indica cuántos electrones se transfieren.
+                            <br><em>Solución:</em> Ca (2e⁻ de valencia) → Ca²⁺; O (6e⁻) → O²⁻; se transfieren 2e⁻.
+                        </div>
+                    </div>
+
+                    <!-- Enlace Covalente -->
+                    <div id="sub-covalente" class="tab-content">
+                        <h3>Enlace Covalente</h3>
+                        <p>Se forma entre <strong>no metales</strong> por <strong>compartición de electrones</strong>. La ΔEN es menor a 1.7.</p>
+                        <ul>
+                            <li><strong>Par enlazante:</strong> par de electrones compartido.</li>
+                            <li><strong>Pares no enlazantes (libres):</strong> electrones que no participan en el enlace.</li>
+                            <li>Los compuestos covalentes forman <strong>moléculas</strong> (no redes iónicas).</li>
+                        </ul>
+                        <div class="img-container">
+                            <!-- IMAGEN: enlace-covalente.png → formación de F2, H2O, etc. -->
+                            <img src="enlace-covalente.png" alt="Formación de enlace covalente" style="max-width:500px;">
+                        </div>
+                        <h4>Clasificación por el origen de los electrones</h4>
+                        <ul>
+                            <li><strong>Covalente normal:</strong> ambos átomos aportan un electrón (ej. H₂, Cl₂).</li>
+                            <li><strong>Covalente coordinado (dativo):</strong> un solo átomo aporta ambos electrones (ej. NH₄⁺, H₃PO₄).</li>
+                        </ul>
+                        <h4>Clasificación por la multiplicidad</h4>
+                        <ul>
+                            <li><strong>Simple:</strong> comparten un par (ej. Cl₂).</li>
+                            <li><strong>Doble:</strong> comparten dos pares (ej. O₂).</li>
+                            <li><strong>Triple:</strong> comparten tres pares (ej. N₂).</li>
+                        </ul>
+                        <div class="tip-box">
+                            <strong>Ejemplo:</strong> En el CO₂, el carbono forma dos enlaces dobles con el oxígeno para completar el octeto.
+                        </div>
+                    </div>
+
+                    <!-- Polaridad -->
+                    <div id="sub-polaridad" class="tab-content">
+                        <h3>Electronegatividad y Polaridad</h3>
+                        <p><strong>Electronegatividad (EN):</strong> Capacidad de un átomo para atraer electrones cuando forma un enlace (Pauling).</p>
+                        <ul>
+                            <li><strong>Enlace covalente apolar:</strong> átomos iguales o de EN similar, compartición simétrica (ej. H₂, C-H en hidrocarburos).</li>
+                            <li><strong>Enlace covalente polar:</strong> átomos de diferente EN, el más electronegativo atrae con más fuerza el par electrónico, generando un <strong>dipolo</strong> (δ⁺ y δ⁻).</li>
+                        </ul>
+                        <div class="img-container">
+                            <!-- IMAGEN: polaridad.png → dipolos en HCl, H2O -->
+                            <img src="polaridad.png" alt="Polaridad de enlaces" style="max-width:500px;">
+                        </div>
+                        <div class="bio-box">
+                            <strong>Importancia en salud:</strong>
+                            <ul>
+                                <li>La <strong>polaridad del agua</strong> la convierte en el solvente de la vida.</li>
+                                <li>La <strong>polaridad de fármacos</strong> influye en su absorción y distribución.</li>
+                                <li>Los <strong>enlaces de hidrógeno</strong> (intermoleculares polares) estabilizan el ADN y las proteínas.</li>
+                            </ul>
+                        </div>
+                        <div class="table-responsive">
+                            <table>
+                                <tr><th>Enlace</th><th>ΔEN</th><th>Tipo</th></tr>
+                                <tr><td>H-H</td><td>0</td><td>Apolar</td></tr>
+                                <tr><td>H-Cl</td><td>0.9</td><td>Polar</td></tr>
+                                <tr><td>H-O (en H₂O)</td><td>1.4</td><td>Polar</td></tr>
+                                <tr><td>Na-Cl</td><td>2.1</td><td>Iónico</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== MAPA CONCEPTUAL ==================== -->
+        <section id="mapa" class="section">
+            <div class="card">
+                <h2>🗺️ Mapa Conceptual Interactivo</h2>
+                <p style="margin-bottom:1rem;">Haz <strong>clic</strong> en cada nodo para desplegar u ocultar sus ramas.</p>
+                <div class="map-container">
+                    <ul class="map-tree">
+                        <li class="has-children">
+                            <div class="map-node root" onclick="toggleMap(this)">🔗 Enlaces Químicos</div>
+                            <ul>
+                                <li class="has-children">
+                                    <div class="map-node branch" onclick="toggleMap(this)">⚡ Enlace Iónico</div>
+                                    <ul>
+                                        <li><span class="map-leaf">Metal + No metal</span></li>
+                                        <li><span class="map-leaf">Transferencia de electrones</span></li>
+                                        <li><span class="map-leaf">Cationes y aniones</span></li>
+                                        <li><span class="map-leaf">Red cristalina</span></li>
+                                        <li><span class="map-leaf">Ejemplos: NaCl, KCl, CaCO₃</span></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <div class="map-node branch" onclick="toggleMap(this)">🧪 Enlace Covalente</div>
+                                    <ul>
+                                        <li><span class="map-leaf">No metal + No metal</span></li>
+                                        <li><span class="map-leaf">Compartición de electrones</span></li>
+                                        <li><span class="map-leaf">Moléculas</span></li>
+                                        <li class="has-children">
+                                            <div class="map-node branch" onclick="toggleMap(this)">Clasificación</div>
+                                            <ul>
+                                                <li><span class="map-leaf">Normal / Coordinado (dativo)</span></li>
+                                                <li><span class="map-leaf">Simple / Doble / Triple</span></li>
+                                                <li><span class="map-leaf">Polar / Apolar</span></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <div class="map-node branch" onclick="toggleMap(this)">⚖️ Polaridad y Electronegatividad</div>
+                                    <ul>
+                                        <li><span class="map-leaf">Diferencia de EN (ΔEN)</span></li>
+                                        <li><span class="map-leaf">Dipolos y momento dipolar</span></li>
+                                        <li><span class="map-leaf">Enlaces de hidrógeno</span></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <div class="map-node branch" onclick="toggleMap(this)">🏥 Aplicaciones en Salud</div>
+                                    <ul>
+                                        <li><span class="map-leaf">Electrolitos (Na⁺, K⁺, Cl⁻)</span></li>
+                                        <li><span class="map-leaf">Fármacos moleculares (aspirina, paracetamol)</span></li>
+                                        <li><span class="map-leaf">Estructura de proteínas y ADN</span></li>
+                                        <li><span class="map-leaf">Soluciones intravenosas</span></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FLASHCARDS ==================== -->
+        <section id="flashcards" class="section">
+            <div class="card">
+                <h2>🃏 Flashcards de Estudio</h2>
+                <p>Haz <strong>clic</strong> en la tarjeta para voltearla y ver la respuesta. Luego califícate con honestidad.</p>
+
+                <div class="fc-stats">
+                    <span class="fc-stat good">✅ Buenas: <span id="fc-good">0</span></span>
+                    <span class="fc-stat bad">❌ Malas: <span id="fc-bad">0</span></span>
+                    <span class="fc-stat pending">⏳ Pendientes: <span id="fc-left">0</span></span>
+                    <span class="fc-stat total">📈 Historial: <span id="fc-hist">0 ✓ / 0 ✗</span></span>
+                </div>
+                <div class="fc-progress"><div class="fc-progress-bar" id="fc-bar"></div></div>
+
+                <div class="flashcard-scene" id="fc-scene">
+                    <div class="flashcard" id="fc-card" onclick="flipCard()">
+                        <div class="fc-face fc-front">
+                            <div class="fc-label">PREGUNTA</div>
+                            <div id="fc-question"></div>
+                            <span class="fc-hint">Clic para voltear ✨</span>
+                        </div>
+                        <div class="fc-face fc-back">
+                            <div class="fc-label">RESPUESTA</div>
+                            <div id="fc-answer"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fc-controls" id="fc-controls">
+                    <button class="fc-btn good" id="btn-fc-good" onclick="gradeCard(true)" disabled>✅ La sabía</button>
+                    <button class="fc-btn bad" id="btn-fc-bad" onclick="gradeCard(false)" disabled>❌ No la sabía</button>
+                </div>
+
+                <div id="fc-summary" class="calc-result" style="max-width:720px;margin:1rem auto;"></div>
+                <div style="text-align:center;">
+                    <button class="calc-button" onclick="resetFlashcards()">🔄 Reiniciar Flashcards</button><br>
+                    <button class="fc-link" onclick="borrarHistorial()">Borrar historial acumulado</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== HERRAMIENTAS ==================== -->
+        <section id="herramientas" class="section">
+            <div class="card">
+                <h2>🧮 Herramientas Interactivas</h2>
+                <div id="herramientas-tabs" class="tab-group">
+                    <div class="tabs">
+                        <button class="tab active" onclick="showTab('herramientas-tabs','calc-electronegatividad',this)">⚡ Diferencia de EN</button>
+                        <button class="tab" onclick="showTab('herramientas-tabs','calc-lewis',this)">📝 Estructura de Lewis</button>
+                    </div>
+
+                    <!-- Diferencia de electronegatividad -->
+                    <div id="calc-electronegatividad" class="tab-content active">
+                        <div class="calculator">
+                            <div class="calc-title">⚡ Diferencia de Electronegatividad</div>
+                            <p>Selecciona dos elementos para calcular la ΔEN y determinar el tipo de enlace.</p>
+                            <div class="calc-input-group">
+                                <label>Elemento 1:</label>
+                                <select id="en-elem1">
+                                    <option value="H">H (2.20)</option>
+                                    <option value="C">C (2.55)</option>
+                                    <option value="N">N (3.04)</option>
+                                    <option value="O">O (3.44)</option>
+                                    <option value="F">F (3.98)</option>
+                                    <option value="Na">Na (0.93)</option>
+                                    <option value="Mg">Mg (1.31)</option>
+                                    <option value="Al">Al (1.61)</option>
+                                    <option value="Si">Si (1.90)</option>
+                                    <option value="P">P (2.19)</option>
+                                    <option value="S">S (2.58)</option>
+                                    <option value="Cl">Cl (3.16)</option>
+                                    <option value="K">K (0.82)</option>
+                                    <option value="Ca">Ca (1.00)</option>
+                                    <option value="Br">Br (2.96)</option>
+                                    <option value="I">I (2.66)</option>
+                                </select>
+                            </div>
+                            <div class="calc-input-group">
+                                <label>Elemento 2:</label>
+                                <select id="en-elem2">
+                                    <option value="H">H (2.20)</option>
+                                    <option value="C">C (2.55)</option>
+                                    <option value="N">N (3.04)</option>
+                                    <option value="O" selected>O (3.44)</option>
+                                    <option value="F">F (3.98)</option>
+                                    <option value="Na">Na (0.93)</option>
+                                    <option value="Mg">Mg (1.31)</option>
+                                    <option value="Al">Al (1.61)</option>
+                                    <option value="Si">Si (1.90)</option>
+                                    <option value="P">P (2.19)</option>
+                                    <option value="S">S (2.58)</option>
+                                    <option value="Cl">Cl (3.16)</option>
+                                    <option value="K">K (0.82)</option>
+                                    <option value="Ca">Ca (1.00)</option>
+                                    <option value="Br">Br (2.96)</option>
+                                    <option value="I">I (2.66)</option>
+                                </select>
+                            </div>
+                            <button class="calc-button" onclick="calcularDeltaEN()">Calcular ΔEN</button>
+                            <div id="resultado-deltaEN" class="calc-result"></div>
+                        </div>
+                    </div>
+
+                    <!-- Estructura de Lewis -->
+                    <div id="calc-lewis" class="tab-content">
+                        <div class="calculator">
+                            <div class="calc-title">📝 Estructura de Lewis (ejemplo)</div>
+                            <p>Aquí puedes visualizar la estructura de Lewis de algunas moléculas comunes.</p>
+                            <div class="img-container">
+                                <!-- IMAGEN: estructuras-lewis.png → Lewis de H2O, CO2, NH3, CH4, etc. -->
+                                <img src="estructuras-lewis.png" alt="Estructuras de Lewis" style="max-width:500px;">
+                            </div>
+                            <div class="info-box">
+                                <strong>Pasos para dibujar una estructura de Lewis:</strong>
+                                <ol style="padding-left:1.2rem;">
+                                    <li>Contar electrones de valencia totales.</li>
+                                    <li>Colocar el átomo menos electronegativo en el centro.</li>
+                                    <li>Distribuir electrones para completar octetos (o dúo para H).</li>
+                                    <li>Formar enlaces múltiples si es necesario.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== APLICACIONES ==================== -->
+        <section id="aplicaciones" class="section">
+            <div class="card">
+                <h2>🏥 Aplicaciones en Ciencias de la Salud</h2>
+                <p>Los enlaces químicos son la base de procesos biológicos y terapéuticos. Aquí algunos ejemplos directos:</p>
+
+                <div class="img-grid">
+                    <!-- IMAGEN: iones-cuerpo.png → iones Na+, K+, Cl- en el cuerpo -->
+                    <figure>
+                        <img src="iones-cuerpo.png" alt="Iones en el cuerpo">
+                        <figcaption>Electrolitos: Na⁺, K⁺, Cl⁻</figcaption>
+                    </figure>
+                    <!-- IMAGEN: farmacos-moleculares.png → aspirina, paracetamol -->
+                    <figure>
+                        <img src="farmacos-moleculares.png" alt="Fármacos moleculares">
+                        <figcaption>Fármacos covalentes</figcaption>
+                    </figure>
+                    <!-- IMAGEN: adn-proteinas.png → estructura de ADN y proteínas -->
+                    <figure>
+                        <img src="adn-proteinas.png" alt="ADN y proteínas">
+                        <figcaption>Enlaces de hidrógeno en biomoléculas</figcaption>
+                    </figure>
+                </div>
+
+                <h3>🧂 Electrolitos y equilibrio iónico</h3>
+                <div class="bio-box">
+                    <ul>
+                        <li><strong>NaCl:</strong> solución salina al 0.9% para rehidratación.</li>
+                        <li><strong>KCl:</strong> corrige hipocalemia (bajo potasio).</li>
+                        <li><strong>CaCO₃:</strong> antiácido y fuente de calcio.</li>
+                        <li><strong>MgSO₄:</strong> usado en eclampsia y arritmias.</li>
+                    </ul>
+                </div>
+
+                <h3>💊 Fármacos y enlaces covalentes</h3>
+                <div class="table-responsive">
+                    <table>
+                        <tr><th>Fármaco</th><th>Fórmula</th><th>Tipo de enlace</th><th>Uso</th></tr>
+                        <tr><td>Aspirina</td><td>C₉H₈O₄</td><td>Covalente polar</td><td>Analgésico, antiinflamatorio</td></tr>
+                        <tr><td>Paracetamol</td><td>C₈H₉NO₂</td><td>Covalente polar</td><td>Analgésico, antipirético</td></tr>
+                        <tr><td>Glucosa</td><td>C₆H₁₂O₆</td><td>Covalente polar</td><td>Nutrición parenteral</td></tr>
+                        <tr><td>Penicilina</td><td>C₁₆H₁₈N₂O₄S</td><td>Covalente</td><td>Antibiótico</td></tr>
+                    </table>
+                </div>
+
+                <h3>🧬 Estructura de biomoléculas</h3>
+                <div class="pharma-box">
+                    <ul>
+                        <li><strong>ADN:</strong> puentes de hidrógeno entre bases nitrogenadas (enlaces polares).</li>
+                        <li><strong>Proteínas:</strong> enlaces peptídicos (covalentes) y puentes de hidrógeno en la estructura secundaria.</li>
+                        <li><strong>Lípidos:</strong> enlaces éster (covalentes) en triglicéridos.</li>
+                        <li><strong>Agua:</strong> enlaces covalentes polares O-H y puentes de hidrógeno intermoleculares.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== MNEMOTECNIAS ==================== -->
+        <section id="mnemotecnias" class="section">
+            <div class="card">
+                <h2>🧠 Nemotecnias y Reglas Mnemotécnicas</h2>
+
+                <div class="mnemonic-card" style="background:linear-gradient(135deg,#f0f8ff 0%,#d4edda 100%);border:3px solid var(--upch-gold);border-radius:12px;padding:1.5rem;margin:1rem 0;">
+                    <div style="color:var(--upch-blue);font-weight:700;font-size:1.2rem;">⚡ "Metal y no metal, iónico total"</div>
+                    <p style="font-style:italic;line-height:2;">
+                        <strong>"Metal + No metal = Iónico"</strong> — recuerda que el enlace iónico se da entre un metal y un no metal.
+                    </p>
+                </div>
+
+                <div class="mnemonic-card" style="background:linear-gradient(135deg,#fff5f5 0%,#ffe0e0 100%);border:3px solid var(--accent);border-radius:12px;padding:1.5rem;margin:1rem 0;">
+                    <div style="color:var(--accent);font-weight:700;font-size:1.2rem;">🔗 "No metales comparten, covalentes son"</div>
+                    <div class="tip-box">
+                        <strong>Compuestos covalentes:</strong> "No metal + No metal → comparten electrones."
+                    </div>
+                </div>
+
+                <div class="mnemonic-card" style="background:linear-gradient(135deg,#fff5f5 0%,#ffe0e0 100%);border:3px solid var(--accent);border-radius:12px;padding:1.5rem;margin:1rem 0;">
+                    <div style="color:var(--accent);font-weight:700;font-size:1.2rem;">📏 "EN diferente, dipolo presente"</div>
+                    <p>Si la diferencia de electronegatividad es > 0.4 y < 1.7, el enlace es <strong>polar</strong>.</p>
+                </div>
+
+                <div class="mnemonic-card" style="background:linear-gradient(135deg,#fff5f5 0%,#ffe0e0 100%);border:3px solid var(--accent);border-radius:12px;padding:1.5rem;margin:1rem 0;">
+                    <div style="color:var(--accent);font-weight:700;font-size:1.2rem;">🔢 "Octeto: 8 es perfecto"</div>
+                    <div class="info-box">
+                        "Los átomos buscan tener 8 electrones en su capa de valencia, como los gases nobles."<br>
+                        <em>Excepciones:</em> H (2), Be (4), B (6).
+                    </div>
+                </div>
+
+                <div class="mnemonic-card" style="background:linear-gradient(135deg,#fff5f5 0%,#ffe0e0 100%);border:3px solid var(--accent);border-radius:12px;padding:1.5rem;margin:1rem 0;">
+                    <div style="color:var(--accent);font-weight:700;font-size:1.2rem;">🧪 "Dativo: uno da todo"</div>
+                    <p>En el enlace coordinado, un solo átomo aporta ambos electrones (ej. NH₄⁺).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== GLOSARIO ==================== -->
+        <section id="glosario" class="section">
+            <div class="card">
+                <h2>📖 Glosario Interactivo</h2>
+                <p style="margin-bottom:1.5rem;">Haz clic en cada término para ver su definición:</p>
+
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Enlace químico</strong><div class="glossary-definition">Unión entre átomos para alcanzar estabilidad, mediante transferencia o compartición de electrones.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Electrones de valencia</strong><div class="glossary-definition">Electrones en el último nivel energético; participan en los enlaces químicos.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Símbolo de Lewis</strong><div class="glossary-definition">Representación de los electrones de valencia como puntos alrededor del símbolo del elemento.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Enlace iónico</strong><div class="glossary-definition">Atracción electrostática entre iones de carga opuesta, formado por transferencia de electrones (metal + no metal).</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Enlace covalente</strong><div class="glossary-definition">Compartición de pares de electrones entre no metales. Puede ser simple, doble o triple.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Enlace covalente coordinado (dativo)</strong><div class="glossary-definition">Enlace covalente donde un solo átomo aporta ambos electrones compartidos.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Regla del octeto</strong><div class="glossary-definition">Tendencia de los átomos a ganar, perder o compartir electrones hasta tener 8 en su capa de valencia.</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Electronegatividad</strong><div class="glossary-definition">Capacidad de un átomo para atraer electrones en un enlace químico (escala de Pauling).</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Enlace covalente polar</strong><div class="glossary-definition">Enlace donde los electrones se comparten de forma desigual, generando un dipolo (δ⁺ y δ⁻).</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Enlace covalente apolar</strong><div class="glossary-definition">Enlace donde los electrones se comparten de forma equitativa (átomos iguales o de EN similar).</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Catión</strong><div class="glossary-definition">Ión con carga positiva, formado por pérdida de electrones (metales).</div></div>
+                <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Anión</strong><div class="glossary-definition">Ión con carga negativa, formado por ganancia de electrones (no metales).</div></div>
+            </div>
+        </section>
+
+        <!-- ==================== ERRORES COMUNES ==================== -->
+        <section id="errores" class="section">
+            <div class="card">
+                <h2>⚠️ Errores Comunes de Estudiantes</h2>
+
+                <div class="error-card">
+                    <div class="error-title">❌ Error 1: Confundir enlace iónico con covalente</div>
+                    <p><strong>Error:</strong> "El NaCl es covalente."</p>
+                    <div class="correction"><strong>✓ Corrección:</strong> NaCl es iónico (metal + no metal). Los covalentes son entre no metales.</div>
+                </div>
+
+                <div class="error-card">
+                    <div class="error-title">❌ Error 2: Olvidar que los electrones de valencia son solo del último nivel</div>
+                    <p><strong>Error:</strong> Contar electrones de capas internas como de valencia.</p>
+                    <div class="correction"><strong>✓ Corrección:</strong> Solo los electrones del último nivel (capa de valencia) participan en enlaces.</div>
+                </div>
+
+                <div class="error-card">
+                    <div class="error-title">❌ Error 3: No aplicar la regla del octeto correctamente</div>
+                    <p><strong>Error:</strong> Dibujar estructuras de Lewis sin completar octetos (excepto excepciones).</p>
+                    <div class="correction"><strong>✓ Corrección:</strong> Asegurar que cada átomo tenga 8 electrones (o 2 para H) en su capa de valencia.</div>
+                </div>
+
+                <div class="error-card">
+                    <div class="error-title">❌ Error 4: Confundir enlace covalente polar con apolar</div>
+                    <p><strong>Error:</strong> "El enlace C-H es polar" (en realidad es apolar o muy poco polar).</p>
+                    <div class="correction"><strong>✓ Corrección:</strong> La polaridad depende de la diferencia de EN. Si ΔEN ≈ 0 (como C-H en hidrocarburos) es apolar.</div>
+                </div>
+
+                <div class="error-card">
+                    <div class="error-title">❌ Error 5: No distinguir entre enlace coordinado y normal</div>
+                    <p><strong>Error:</strong> Pensar que todos los enlaces covalentes son normales.</p>
+                    <div class="correction"><strong>✓ Corrección:</strong> En el enlace coordinado, un solo átomo aporta el par de electrones (ej. NH₄⁺, H₃PO₄).</div>
+                </div>
+
+                <div class="tip-box" style="margin-top:2rem;">
+                    <strong>💡 Consejo:</strong> Practica dibujando estructuras de Lewis y calculando la ΔEN para dominar estos conceptos.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== BIBLIOGRAFÍA ==================== -->
+        <section id="bibliografia" class="section">
+            <div class="card">
+                <h2>📚 Bibliografía Universitaria</h2>
+
+                <h3>Libros de Química General</h3>
+                <div class="info-box">
+                    <strong>1. Chang, R., & Goldsby, K. A. (2017).</strong> <em>Química</em> (12ª ed.). McGraw-Hill.<br>
+                    • <strong>Capítulo 8:</strong> Enlace químico I: conceptos básicos (páginas 300-350).<br>
+                    • <strong>Capítulo 9:</strong> Enlace químico II: geometría molecular y orbitales híbridos.
+                </div>
+                <div class="info-box">
+                    <strong>2. Brown, T. L., LeMay, H. E., Bursten, B. E., & Murphy, C. J. (2018).</strong> <em>Química: La Ciencia Central</em> (13ª ed.). Pearson.<br>
+                    • <strong>Capítulo 8:</strong> Conceptos básicos del enlace químico.<br>
+                    • <strong>Capítulo 9:</strong> Teoría del enlace de valencia y orbitales moleculares.
+                </div>
+                <div class="info-box">
+                    <strong>3. Petrucci, R. H., Herring, F. G., Madura, J. D., & Bissonnette, C. (2017).</strong> <em>Química General: Principios y Aplicaciones Modernas</em> (11ª ed.). Pearson.<br>
+                    • <strong>Capítulo 10:</strong> Enlace químico I: conceptos fundamentales.<br>
+                    • <strong>Capítulo 11:</strong> Enlace químico II: geometría molecular y polaridad.
+                </div>
+
+                <h3>Recursos en Línea</h3>
+                <div class="bio-box">
+                    <strong>Tabla de electronegatividades (Pauling):</strong> <a href="https://www.ptable.com" target="_blank" style="color:var(--upch-blue);">https://www.ptable.com</a><br>
+                    <strong>Simulador de estructuras de Lewis:</strong> <a href="https://phet.colorado.edu/sims/html/molecule-shapes/latest/molecule-shapes_es.html" target="_blank" style="color:var(--upch-blue);">PhET - Formas moleculares</a><br>
+                    <strong>Khan Academy - Enlaces químicos:</strong> <a href="https://es.khanacademy.org/science/chemistry" target="_blank" style="color:var(--upch-blue);">https://es.khanacademy.org</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== QUIZ ==================== -->
+        <section id="quiz" class="section">
+            <div class="card">
+                <h2>🎯 Quiz de Autoevaluación</h2>
+                <p>Se mostrarán <strong>5 preguntas al azar</strong> de un total de 15. Al finalizar, podrás cargar una nueva ronda.</p>
+                <div id="quiz-container"></div>
+                <div style="text-align:center;margin-top:2rem;">
+                    <button class="calc-button" onclick="cargarQuiz()">🔄 Nueva ronda</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p style="font-size:1.2rem;margin-bottom:0.5rem;">🎓 Universidad Peruana Cayetano Heredia</p>
+        <p>Unidad de Formación Básica Integral · Curso: Elementos de Química</p>
+        <p style="margin-top:0.5rem;font-style:italic;">"La química es el puente entre la materia y la vida"</p>
+        <p style="margin-top:2rem;font-size:0.9rem;">© 2026 · Material educativo para estudiantes de ciencias de la salud</p>
+    </footer>
+
+    <script>
+        // ============================================================
+        //  NAVEGACIÓN
+        // ============================================================
+        function showSection(sectionId, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showTab(groupId, tabId, btn) {
+            const group = document.getElementById(groupId);
+            group.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            group.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (btn) btn.classList.add('active');
+        }
+
+        // ============================================================
+        //  MAPA CONCEPTUAL
+        // ============================================================
+        function toggleMap(node) {
+            node.parentElement.classList.toggle('open');
+        }
+
+        // ============================================================
+        //  GLOSARIO
+        // ============================================================
+        function toggleDefinition(el) {
+            const def = el.querySelector('.glossary-definition');
+            def.classList.toggle('show');
+            el.style.background = def.classList.contains('show') ? '#fff9e6' : 'var(--white)';
+        }
+
+        // ============================================================
+        //  FLASHCARDS (20 tarjetas sobre enlaces químicos)
+        // ============================================================
+        const flashcards = [
+            { q: '¿Qué es un enlace químico?', a: 'Unión entre átomos para alcanzar estabilidad, mediante transferencia o compartición de electrones.' },
+            { q: '¿Qué son los electrones de valencia?', a: 'Electrones del último nivel energético; participan en los enlaces.' },
+            { q: '¿Qué representa un símbolo de Lewis?', a: 'Los electrones de valencia como puntos alrededor del símbolo del elemento.' },
+            { q: '¿Cómo se forma un enlace iónico?', a: 'Por transferencia de electrones de un metal a un no metal, formando iones.' },
+            { q: '¿Qué es la regla del octeto?', a: 'Tendencia a tener 8 electrones en la capa de valencia (configuración de gas noble).' },
+            { q: '¿Qué es un catión?', a: 'Ión con carga positiva, formado al perder electrones (metales).' },
+            { q: '¿Qué es un anión?', a: 'Ión con carga negativa, formado al ganar electrones (no metales).' },
+            { q: '¿Qué tipo de enlace une al Na y Cl en el NaCl?', a: 'Enlace iónico (Na⁺ Cl⁻).' },
+            { q: '¿Qué compuestos forman enlace covalente?', a: 'No metales, comparten electrones.' },
+            { q: '¿Qué es un enlace covalente normal?', a: 'Ambos átomos aportan un electrón al par enlazante.' },
+            { q: '¿Qué es un enlace covalente coordinado (dativo)?', a: 'Un solo átomo aporta ambos electrones del par enlazante.' },
+            { q: '¿Qué es un enlace covalente simple?', a: 'Compartición de un par de electrones.' },
+            { q: '¿Qué es un enlace covalente doble?', a: 'Compartición de dos pares de electrones (ej. O₂).' },
+            { q: '¿Qué es un enlace covalente triple?', a: 'Compartición de tres pares de electrones (ej. N₂).' },
+            { q: '¿Qué es la electronegatividad?', a: 'Capacidad de un átomo para atraer electrones en un enlace.' },
+            { q: '¿Qué es un enlace covalente polar?', a: 'Compartición desigual de electrones, generando dipolos (δ⁺ y δ⁻).' },
+            { q: '¿Qué es un enlace covalente apolar?', a: 'Compartición equitativa de electrones (átomos iguales o EN similar).' },
+            { q: '¿Cuál es la ΔEN para un enlace iónico típico?', a: 'Mayor a 1.7.' },
+            { q: '¿Cuál es la ΔEN para un enlace covalente polar?', a: 'Entre 0.4 y 1.7.' },
+            { q: '¿Cuál es la ΔEN para un enlace covalente apolar?', a: 'Menor a 0.4 (generalmente 0).' }
+        ];
+
+        let fcIndex = 0,
+            fcFlipped = false,
+            fcGood = 0,
+            fcBad = 0,
+            fcDone = false;
+
+        function fcUpdateStats() {
+            document.getElementById('fc-good').textContent = fcGood;
+            document.getElementById('fc-bad').textContent = fcBad;
+            document.getElementById('fc-left').textContent = Math.max(0, flashcards.length - fcIndex);
+            const tg = parseInt(localStorage.getItem('fcTotalGood') || '0', 10);
+            const tb = parseInt(localStorage.getItem('fcTotalBad') || '0', 10);
+            document.getElementById('fc-hist').textContent = tg + ' ✓ / ' + tb + ' ✗';
+            document.getElementById('fc-bar').style.width = (fcIndex / flashcards.length * 100) + '%';
+        }
+
+        function fcRenderCard() {
+            const card = document.getElementById('fc-card');
+            card.classList.remove('flipped');
+            fcFlipped = false;
+            document.getElementById('fc-question').textContent = flashcards[fcIndex].q;
+            document.getElementById('fc-answer').textContent = flashcards[fcIndex].a;
+            document.getElementById('btn-fc-good').disabled = true;
+            document.getElementById('btn-fc-bad').disabled = true;
+            fcUpdateStats();
+        }
+
+        function flipCard() {
+            if (fcDone) return;
+            const card = document.getElementById('fc-card');
+            card.classList.toggle('flipped');
+            fcFlipped = card.classList.contains('flipped');
+            document.getElementById('btn-fc-good').disabled = !fcFlipped;
+            document.getElementById('btn-fc-bad').disabled = !fcFlipped;
+        }
+
+        function gradeCard(wasGood) {
+            if (!fcFlipped || fcDone) return;
+            if (wasGood) {
+                fcGood++;
+                localStorage.setItem('fcTotalGood', String(parseInt(localStorage.getItem('fcTotalGood') || '0', 10) + 1));
+            } else {
+                fcBad++;
+                localStorage.setItem('fcTotalBad', String(parseInt(localStorage.getItem('fcTotalBad') || '0', 10) + 1));
+            }
+            fcIndex++;
+            if (fcIndex < flashcards.length) {
+                fcRenderCard();
+            } else {
+                fcFinish();
+            }
+        }
+
+        function fcFinish() {
+            fcDone = true;
+            document.getElementById('fc-scene').style.display = 'none';
+            document.getElementById('fc-controls').style.display = 'none';
+            const total = fcGood + fcBad;
+            const pct = Math.round(fcGood / total * 100);
+            let msg = pct >= 80 ? ' ¡Excelente! Dominas el tema.' : (pct >= 60 ? '💪 ¡Bien! Repasa las que fallaste.' :
+                '📚 Necesitas repasar: vuelve a la pestaña Conceptos.');
+            const sum = document.getElementById('fc-summary');
+            sum.innerHTML = '<strong>📊 Resumen de la sesión:</strong><br>✅ Buenas: ' + fcGood + ' &nbsp; ❌ Malas: ' + fcBad +
+                '<br>Precisión: <strong>' + pct + '%</strong><br>' + msg;
+            sum.classList.add('show');
+            fcUpdateStats();
+        }
+
+        function resetFlashcards() {
+            fcIndex = 0;
+            fcGood = 0;
+            fcBad = 0;
+            fcDone = false;
+            document.getElementById('fc-scene').style.display = 'block';
+            document.getElementById('fc-controls').style.display = 'flex';
+            document.getElementById('fc-summary').classList.remove('show');
+            fcRenderCard();
+        }
+
+        function borrarHistorial() {
+            localStorage.removeItem('fcTotalGood');
+            localStorage.removeItem('fcTotalBad');
+            fcUpdateStats();
+        }
+
+        // ============================================================
+        //  HERRAMIENTAS: Diferencia de electronegatividad
+        // ============================================================
+        const electronegatividades = {
+            H: 2.20,
+            C: 2.55,
+            N: 3.04,
+            O: 3.44,
+            F: 3.98,
+            Na: 0.93,
+            Mg: 1.31,
+            Al: 1.61,
+            Si: 1.90,
+            P: 2.19,
+            S: 2.58,
+            Cl: 3.16,
+            K: 0.82,
+            Ca: 1.00,
+            Br: 2.96,
+            I: 2.66
+        };
+
+        function calcularDeltaEN() {
+            const e1 = document.getElementById('en-elem1').value;
+            const e2 = document.getElementById('en-elem2').value;
+            const en1 = electronegatividades[e1];
+            const en2 = electronegatividades[e2];
+            const delta = Math.abs(en1 - en2);
+            const res = document.getElementById('resultado-deltaEN');
+            let tipo = '';
+            if (delta > 1.7) tipo = '⚡ Enlace iónico';
+            else if (delta > 0.4) tipo = '🧪 Enlace covalente polar';
+            else tipo = '🔗 Enlace covalente apolar (o no polar)';
+            res.innerHTML = 'ΔEN (' + e1 + ' - ' + e2 + ') = <strong>' + delta.toFixed(2) + '</strong><br>Tipo de enlace: ' +
+                tipo;
+            res.classList.add('show');
+        }
+
+        // ============================================================
+        //  QUIZ (15 preguntas sobre enlaces químicos, se muestran 5 al azar)
+        // ============================================================
+        const preguntasBase = [{
+            pregunta: '¿Qué tipo de enlace se forma entre un metal y un no metal?',
+            opciones: ['Iónico', 'Covalente polar', 'Covalente apolar', 'Metálico'],
+            correcta: 0,
+            explicacion: 'El enlace iónico se forma por transferencia de electrones de un metal a un no metal.'
+        }, {
+            pregunta: '¿Cuál es la partícula más pequeña de un compuesto covalente?',
+            opciones: ['Unidad fórmula', 'Molécula', 'Ión', 'Átomo'],
+            correcta: 1,
+            explicacion: 'Los compuestos covalentes forman moléculas, que son la partícula más pequeña con propiedades del compuesto.'
+        }, {
+            pregunta: '¿Qué enlace presenta el agua (H₂O)?',
+            opciones: ['Iónico', 'Covalente polar', 'Covalente apolar', 'Metálico'],
+            correcta: 1,
+            explicacion: 'El agua tiene enlaces covalentes polares O-H debido a la diferencia de electronegatividad.'
+        }, {
+            pregunta: '¿Qué es la regla del octeto?',
+            opciones: ['Los átomos buscan tener 8 electrones en su capa de valencia', 'Los átomos buscan tener 8 neutrones',
+                'Los átomos buscan tener 8 protones', 'Los átomos buscan tener 8 electrones en total'
+            ],
+            correcta: 0,
+            explicacion: 'La regla del octeto establece que los átomos tienden a completar 8 electrones en su capa de valencia para alcanzar estabilidad.'
+        }, {
+            pregunta: '¿Qué tipo de enlace es el NaCl?',
+            opciones: ['Covalente polar', 'Covalente apolar', 'Iónico', 'Metálico'],
+            correcta: 2,
+            explicacion: 'NaCl es iónico porque se forma entre un metal (Na) y un no metal (Cl).'
+        }, {
+            pregunta: '¿Qué caracteriza a un enlace covalente polar?',
+            opciones: ['Compartición equitativa de electrones', 'Transferencia total de electrones',
+                'Compartición desigual de electrones', 'No hay compartición'
+            ],
+            correcta: 2,
+            explicacion: 'En un enlace covalente polar, los electrones se comparten de forma desigual debido a la diferencia de electronegatividad.'
+        }, {
+            pregunta: '¿Qué es un enlace covalente coordinado (dativo)?',
+            opciones: ['Ambos átomos aportan un electrón', 'Un solo átomo aporta ambos electrones',
+                'Se transfiere un electrón', 'No se comparten electrones'
+            ],
+            correcta: 1,
+            explicacion: 'En el enlace coordinado, un átomo aporta el par de electrones completo.'
+        }, {
+            pregunta: '¿Cuántos enlaces covalentes simples tiene el metano (CH₄)?',
+            opciones: ['1', '2', '3', '4'],
+            correcta: 3,
+            explicacion: 'El carbono forma 4 enlaces simples con 4 átomos de hidrógeno.'
+        }, {
+            pregunta: '¿Qué tipo de enlace presenta el oxígeno molecular (O₂)?',
+            opciones: ['Simple', 'Doble', 'Triple', 'Iónico'],
+            correcta: 1,
+            explicacion: 'El O₂ tiene un enlace covalente doble (dos pares de electrones compartidos).'
+        }, {
+            pregunta: '¿Qué es la electronegatividad?',
+            opciones: ['Capacidad de un átomo para atraer electrones', 'Capacidad de un átomo para perder electrones',
+                'Masa de un átomo', 'Número de electrones de valencia'
+            ],
+            correcta: 0,
+            explicacion: 'La electronegatividad mide la tendencia de un átomo a atraer electrones en un enlace.'
+        }, {
+            pregunta: '¿Cuál de los siguientes enlaces es apolar?',
+            opciones: ['H-F', 'H-O', 'C-H', 'Na-Cl'],
+            correcta: 2,
+            explicacion: 'El enlace C-H en hidrocarburos es prácticamente apolar porque la diferencia de EN es muy pequeña.'
+        }, {
+            pregunta: '¿Qué iones forman el cloruro de potasio (KCl)?',
+            opciones: ['K⁺ y Cl⁻', 'K⁺ y Cl⁺', 'K⁻ y Cl⁺', 'K⁻ y Cl⁻'],
+            correcta: 0,
+            explicacion: 'K pierde un electrón formando K⁺, y Cl gana un electrón formando Cl⁻.'
+        }, {
+            pregunta: '¿Qué tipo de enlace se encuentra en la sal de mesa (NaCl)?',
+            opciones: ['Covalente', 'Iónico', 'Metálico', 'Puente de hidrógeno'],
+            correcta: 1,
+            explicacion: 'NaCl es un compuesto iónico formado por iones Na⁺ y Cl⁻.'
+        }, {
+            pregunta: '¿Qué es un dipolo?',
+            opciones: ['Separación de cargas en un enlace polar', 'Un átomo con carga neutra',
+                'Un ion con carga positiva', 'Un ion con carga negativa'
+            ],
+            correcta: 0,
+            explicacion: 'Un dipolo se forma cuando hay una distribución asimétrica de carga en un enlace polar.'
+        }, {
+            pregunta: '¿Cuál es la diferencia de electronegatividad (ΔEN) que caracteriza un enlace iónico?',
+            opciones: ['< 0.4', '0.4 - 1.7', '> 1.7', '= 0'],
+            correcta: 2,
+            explicacion: 'Un enlace iónico típicamente tiene ΔEN > 1.7.'
+        }];
+
+        let preguntasActuales = [];
+        let quizIndex = 0;
+        let quizAciertos = 0;
+        let quizRespondidas = 0;
+
+        function cargarQuiz() {
+            const shuffled = [...preguntasBase];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            preguntasActuales = shuffled.slice(0, 5);
+            quizIndex = 0;
+            quizAciertos = 0;
+            quizRespondidas = 0;
+            mostrarPregunta();
+        }
+
+        function mostrarPregunta() {
+            const container = document.getElementById('quiz-container');
+            if (quizIndex >= preguntasActuales.length) {
+                const total = preguntasActuales.length;
+                const pct = Math.round(quizAciertos / total * 100);
+                let msg = pct >= 80 ? '🎉 ¡Excelente!' : (pct >= 60 ? '💪 ¡Bien, sigue practicando!' :
+                    '📚 Revisa los conceptos y vuelve a intentarlo.');
+                container.innerHTML = `
+                    <div class="quiz-container" style="text-align:center;">
+                        <h3 style="color:var(--upch-gold);">¡Ronda completada!</h3>
+                        <p style="font-size:1.5rem;">✅ ${quizAciertos} de ${total} correctas</p>
+                        <p>Precisión: ${pct}%</p>
+                        <p>${msg}</p>
+                        <button class="calc-button" onclick="cargarQuiz()" style="margin-top:1.5rem;">🔄 Nueva ronda</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const q = preguntasActuales[quizIndex];
+            const opcionesHtml = q.opciones.map((opt, idx) =>
+                `<button class="quiz-option" onclick="responderPregunta(${quizIndex}, ${idx}, this)">${opt}</button>`
+            ).join('');
+
+            container.innerHTML = `
+                <div class="quiz-container">
+                    <div class="quiz-progress">
+                        <span>Pregunta ${quizIndex+1} de ${preguntasActuales.length}</span>
+                        <span>✅ ${quizAciertos} correctas</span>
+                    </div>
+                    <div class="quiz-question">${q.pregunta}</div>
+                    <div class="quiz-options">${opcionesHtml}</div>
+                    <div class="quiz-feedback" id="feedback-actual"></div>
+                </div>
+            `;
+        }
+
+        function responderPregunta(idx, opcionSeleccionada, btn) {
+            const q = preguntasActuales[idx];
+            const fb = document.getElementById('feedback-actual');
+            const opts = btn.parentElement.querySelectorAll('.quiz-option');
+            opts.forEach(o => o.disabled = true);
+
+            const correcta = q.correcta;
+            if (opcionSeleccionada === correcta) {
+                btn.classList.add('correct');
+                quizAciertos++;
+                fb.innerHTML = '<span style="color:#4caf50;font-weight:bold;">✅ ¡Correcto!</span> ' + q.explicacion;
+                fb.style.background = '#e8f5e9';
+            } else {
+                btn.classList.add('incorrect');
+                opts[correcta].classList.add('correct');
+                fb.innerHTML = '<span style="color:#f44336;font-weight:bold;">❌ Incorrecto</span> ' + q.explicacion;
+                fb.style.background = '#ffebee';
+            }
+            fb.style.display = 'block';
+            quizRespondidas++;
+
+            setTimeout(() => {
+                quizIndex++;
+                mostrarPregunta();
+            }, 2000);
+        }
+
+        // ============================================================
+        //  INICIALIZACIÓN
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            fcRenderCard();
+            cargarQuiz();
+            // Mostrar primera subpestaña de herramientas
+            document.querySelector('#herramientas-tabs .tab.active')?.click();
+        });
+
+        console.log('=== IMÁGENES PNG REQUERIDAS ===');
+        console.log('1. logo-upch.png              → Logo de la universidad (cabecera)');
+        console.log('2. aplicaciones-salud.png     → Aplicaciones en salud (iones, fármacos, ADN)');
+        console.log('3. simbolos-lewis.png         → Símbolos de Lewis de elementos comunes');
+        console.log('4. enlace-ionico.png          → Formación de enlace iónico (NaCl, MgO)');
+        console.log('5. enlace-covalente.png       → Formación de enlace covalente (F2, H2O)');
+        console.log('6. polaridad.png              → Dipolos en HCl, H2O');
+        console.log('7. estructuras-lewis.png      → Estructuras de Lewis de moléculas (H2O, CO2, etc.)');
+        console.log('8. iones-cuerpo.png           → Iones Na+, K+, Cl- en el cuerpo');
+        console.log('9. farmacos-moleculares.png   → Fármacos moleculares (aspirina, paracetamol)');
+        console.log('10. adn-proteinas.png         → Estructura de ADN y proteínas con enlaces de hidrógeno');
+        console.log('Coloca estos archivos en la misma carpeta que este HTML.');
+    </script>
+</body>
+</html>
